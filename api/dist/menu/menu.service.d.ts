@@ -5,17 +5,17 @@ export declare class MenuService {
     create(name: string, price: number, category: string, userId: string): Promise<{
         id: string;
         name: string;
+        establishmentId: string;
+        isActive: boolean;
         price: number;
         category: string;
-        isActive: boolean;
-        establishmentId: string;
     }>;
     findAll(userId: string): Promise<{
         id: string;
         name: string;
+        establishmentId: string;
+        isActive: boolean;
         price: number;
         category: string;
-        isActive: boolean;
-        establishmentId: string;
     }[]>;
 }

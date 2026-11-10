@@ -41,7 +41,6 @@ model Establishment {
   tables            Table[]
   bookings          Booking[]
   shifts            Shift[]
-  reviews           Review[]
   menuItems         MenuItem[]
   promotions        Promotion[]
   techCards         TechCard[]
@@ -86,18 +85,6 @@ model Shift {
   status          String   @default("planned")
 
   user            User @relation(fields: [userId], references: [id])
-  establishment   Establishment @relation(fields: [establishmentId], references: [id])
-}
-
-model Review {
-  id              String   @id @default(cuid())
-  establishmentId String
-  authorName      String
-  text            String
-  rating          Int
-  status          String   @default("pending")
-  createdAt       DateTime @default(now())
-
   establishment   Establishment @relation(fields: [establishmentId], references: [id])
 }
 

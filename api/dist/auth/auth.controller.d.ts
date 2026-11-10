@@ -1,7 +1,9 @@
 import { AuthService } from './auth.service';
+import { PrismaService } from '../prisma/prisma.service';
 export declare class AuthController {
     private authService;
-    constructor(authService: AuthService);
+    private prisma;
+    constructor(authService: AuthService, prisma: PrismaService);
     register(body: {
         email: string;
         password: string;
@@ -28,4 +30,14 @@ export declare class AuthController {
         };
         token: string;
     }>;
+    getProfile(req: any): Promise<{
+        id: string;
+        email: string;
+        name: string;
+        photo: string | null;
+        role: string;
+        position: string | null;
+        tipLink: string | null;
+        establishmentId: string | null;
+    } | null>;
 }

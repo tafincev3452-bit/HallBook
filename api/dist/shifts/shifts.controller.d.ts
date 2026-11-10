@@ -9,12 +9,12 @@ export declare class ShiftsController {
         userId: string;
     }, req: any): Promise<{
         id: string;
+        establishmentId: string;
+        userId: string;
         date: Date;
         startTime: string;
         endTime: string;
         status: string;
-        userId: string;
-        establishmentId: string;
     }>;
     findAll(req: any): Promise<({
         user: {
@@ -24,11 +24,11 @@ export declare class ShiftsController {
         };
     } & {
         id: string;
+        establishmentId: string;
+        userId: string;
         date: Date;
         startTime: string;
         endTime: string;
         status: string;
-        userId: string;
-        establishmentId: string;
     })[]>;
 }

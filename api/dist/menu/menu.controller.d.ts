@@ -9,17 +9,17 @@ export declare class MenuController {
     }, req: any): Promise<{
         id: string;
         name: string;
+        establishmentId: string;
+        isActive: boolean;
         price: number;
         category: string;
-        isActive: boolean;
-        establishmentId: string;
     }>;
     findAll(req: any): Promise<{
         id: string;
         name: string;
+        establishmentId: string;
+        isActive: boolean;
         price: number;
         category: string;
-        isActive: boolean;
-        establishmentId: string;
     }[]>;
 }

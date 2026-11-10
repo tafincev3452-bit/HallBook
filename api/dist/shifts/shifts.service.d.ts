@@ -4,12 +4,12 @@ export declare class ShiftsService {
     constructor(prisma: PrismaService);
     create(date: string, startTime: string, endTime: string, userIdToAssign: string, adminUserId: string): Promise<{
         id: string;
+        establishmentId: string;
+        userId: string;
         date: Date;
         startTime: string;
         endTime: string;
         status: string;
-        userId: string;
-        establishmentId: string;
     }>;
     findAll(adminUserId: string): Promise<({
         user: {
@@ -19,11 +19,11 @@ export declare class ShiftsService {
         };
     } & {
         id: string;
+        establishmentId: string;
+        userId: string;
         date: Date;
         startTime: string;
         endTime: string;
         status: string;
-        userId: string;
-        establishmentId: string;
     })[]>;
 }
