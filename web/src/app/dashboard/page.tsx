@@ -75,6 +75,33 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Схема зала */}
+        <div className="bg-white/10 backdrop-blur border border-white/10 p-6 rounded-2xl mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Схема зала</h2>
+          <div className="relative w-full h-96 bg-slate-800/50 border border-white/20 rounded-xl overflow-hidden">
+            {tables.map(table => (
+              <div
+                key={table.id}
+                className="absolute bg-blue-600/80 border border-blue-400 rounded-lg flex items-center justify-center text-sm font-medium cursor-pointer hover:bg-blue-500 transition"
+                style={{
+  left: table.x + 'px',
+  top: table.y + 'px',
+  width: '80px',
+  height: '60px',
+}}
+title={table.name + ' — ' + table.seats + ' мест'}
+              >
+                {table.name}
+              </div>
+            ))}
+            {tables.length === 0 && (
+              <div className="absolute inset-0 flex items-center justify-center text-white/50">
+                Добавьте столы, чтобы увидеть схему
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="bg-white/10 backdrop-blur border border-white/10 p-6 rounded-2xl">
             <h2 className="text-2xl font-semibold mb-4">Меню <span className="text-blue-300">({menu.length})</span></h2>
@@ -106,6 +133,10 @@ export default function DashboardPage() {
             <div className="space-y-3">
               <input placeholder="Название" value={newTable.name} onChange={e => setNewTable({...newTable, name: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
               <input placeholder="Количество мест" type="number" value={newTable.seats} onChange={e => setNewTable({...newTable, seats: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <div className="grid grid-cols-2 gap-2">
+                <input placeholder="X" type="number" value={newTable.x} onChange={e => setNewTable({...newTable, x: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+                <input placeholder="Y" type="number" value={newTable.y} onChange={e => setNewTable({...newTable, y: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              </div>
               <button onClick={createTable} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 p-3 rounded-xl font-semibold transition">
                 Добавить стол
               </button>
