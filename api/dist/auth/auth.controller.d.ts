@@ -1,0 +1,31 @@
+import { AuthService } from './auth.service';
+export declare class AuthController {
+    private authService;
+    constructor(authService: AuthService);
+    register(body: {
+        email: string;
+        password: string;
+        name: string;
+        role?: string;
+    }): Promise<{
+        user: {
+            id: string;
+            email: string;
+            name: string;
+            role: string;
+        };
+        token: string;
+    }>;
+    login(body: {
+        email: string;
+        password: string;
+    }): Promise<{
+        user: {
+            id: string;
+            email: string;
+            name: string;
+            role: string;
+        };
+        token: string;
+    }>;
+}
