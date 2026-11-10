@@ -4,12 +4,12 @@ export declare class HookahController {
     constructor(hookahService: HookahService);
     create(body: any, req: any): Promise<{
         id: string;
+        createdAt: Date;
+        status: string;
+        tableId: string;
         strength: string;
         flavors: string[];
         wishes: string | null;
-        status: string;
-        createdAt: Date;
-        tableId: string;
         masterId: string;
     }>;
     findAll(req: any): Promise<({
@@ -17,19 +17,19 @@ export declare class HookahController {
             id: string;
             name: string;
             establishmentId: string;
-            x: number;
             y: number;
-            seats: number;
             isActive: boolean;
+            x: number;
+            seats: number;
         };
     } & {
         id: string;
+        createdAt: Date;
+        status: string;
+        tableId: string;
         strength: string;
         flavors: string[];
         wishes: string | null;
-        status: string;
-        createdAt: Date;
-        tableId: string;
         masterId: string;
     })[]>;
 }

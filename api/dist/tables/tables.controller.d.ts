@@ -5,20 +5,20 @@ export declare class TablesController {
     create(body: any, req: any): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }>;
     findAll(req: any): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }[]>;
     updatePosition(id: string, body: {
         x: number;
@@ -26,10 +26,10 @@ export declare class TablesController {
     }, req: any): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }>;
 }

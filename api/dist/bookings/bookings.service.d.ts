@@ -4,34 +4,34 @@ export declare class BookingsService {
     constructor(prisma: PrismaService);
     create(tableId: string, guestName: string, guestPhone: string, date: string, guestsCount: number, adminUserId: string): Promise<{
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        date: Date;
+        status: string;
         guestName: string;
         guestPhone: string;
-        date: Date;
         guestsCount: number;
-        status: string;
-        createdAt: Date;
         tableId: string;
-        establishmentId: string;
     }>;
     findAll(adminUserId: string): Promise<({
         table: {
             id: string;
-            establishmentId: string;
             name: string;
-            x: number;
+            establishmentId: string;
             y: number;
-            seats: number;
             isActive: boolean;
+            x: number;
+            seats: number;
         };
     } & {
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        date: Date;
+        status: string;
         guestName: string;
         guestPhone: string;
-        date: Date;
         guestsCount: number;
-        status: string;
-        createdAt: Date;
         tableId: string;
-        establishmentId: string;
     })[]>;
 }

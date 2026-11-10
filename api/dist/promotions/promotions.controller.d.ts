@@ -4,16 +4,16 @@ export declare class PromotionsController {
     constructor(promotionsService: PromotionsService);
     create(body: any, req: any): Promise<{
         id: string;
+        establishmentId: string;
+        isActive: boolean;
         title: string;
         description: string;
-        isActive: boolean;
-        establishmentId: string;
     }>;
     findAll(req: any): Promise<{
         id: string;
+        establishmentId: string;
+        isActive: boolean;
         title: string;
         description: string;
-        isActive: boolean;
-        establishmentId: string;
     }[]>;
 }

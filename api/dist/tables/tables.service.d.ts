@@ -5,28 +5,28 @@ export declare class TablesService {
     create(name: string, x: number, y: number, seats: number, adminUserId: string): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }>;
     findAll(adminUserId: string): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }[]>;
     updatePosition(id: string, x: number, y: number, adminUserId: string): Promise<{
         id: string;
         name: string;
-        x: number;
-        y: number;
-        seats: number;
-        isActive: boolean;
         establishmentId: string;
+        y: number;
+        isActive: boolean;
+        x: number;
+        seats: number;
     }>;
 }

@@ -4,34 +4,34 @@ export declare class BookingsController {
     constructor(bookingsService: BookingsService);
     create(body: any, req: any): Promise<{
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        date: Date;
+        status: string;
         guestName: string;
         guestPhone: string;
-        date: Date;
         guestsCount: number;
-        status: string;
-        createdAt: Date;
         tableId: string;
-        establishmentId: string;
     }>;
     findAll(req: any): Promise<({
         table: {
             id: string;
-            establishmentId: string;
             name: string;
-            x: number;
+            establishmentId: string;
             y: number;
-            seats: number;
             isActive: boolean;
+            x: number;
+            seats: number;
         };
     } & {
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        date: Date;
+        status: string;
         guestName: string;
         guestPhone: string;
-        date: Date;
         guestsCount: number;
-        status: string;
-        createdAt: Date;
         tableId: string;
-        establishmentId: string;
     })[]>;
 }

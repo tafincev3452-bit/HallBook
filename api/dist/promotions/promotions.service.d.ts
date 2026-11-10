@@ -4,16 +4,16 @@ export declare class PromotionsService {
     constructor(prisma: PrismaService);
     create(title: string, description: string, adminUserId: string): Promise<{
         id: string;
+        establishmentId: string;
+        isActive: boolean;
         title: string;
         description: string;
-        isActive: boolean;
-        establishmentId: string;
     }>;
     findAll(adminUserId: string): Promise<{
         id: string;
+        establishmentId: string;
+        isActive: boolean;
         title: string;
         description: string;
-        isActive: boolean;
-        establishmentId: string;
     }[]>;
 }

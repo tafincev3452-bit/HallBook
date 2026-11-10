@@ -4,26 +4,26 @@ export declare class TechcardsController {
     constructor(techcardsService: TechcardsService);
     create(body: any, req: any): Promise<{
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        isActive: boolean;
         title: string;
         ingredients: import("@prisma/client/runtime/library").JsonValue;
         steps: string[];
         outputWeight: string | null;
         calories: number | null;
-        isActive: boolean;
-        createdAt: Date;
-        establishmentId: string;
         menuItemId: string | null;
     }>;
     findAll(req: any): Promise<{
         id: string;
+        establishmentId: string;
+        createdAt: Date;
+        isActive: boolean;
         title: string;
         ingredients: import("@prisma/client/runtime/library").JsonValue;
         steps: string[];
         outputWeight: string | null;
         calories: number | null;
-        isActive: boolean;
-        createdAt: Date;
-        establishmentId: string;
         menuItemId: string | null;
     }[]>;
 }
