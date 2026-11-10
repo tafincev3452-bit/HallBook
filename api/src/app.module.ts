@@ -8,9 +8,11 @@ import { MenuModule } from './menu/menu.module';
 import { ShiftsModule } from './shifts/shifts.module';
 import { TechcardsModule } from './techcards/techcards.module';
 import { TablesModule } from './tables/tables.module';
+import { PromotionsModule } from './promotions/promotions.module';
+import { HookahModule } from './hookah/hookah.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, EstablishmentsModule, MenuModule, ShiftsModule, TechcardsModule, TablesModule],
+  imports: [PrismaModule, AuthModule, EstablishmentsModule, MenuModule, ShiftsModule, TechcardsModule, TablesModule, PromotionsModule, HookahModule],
   controllers: [AppController],
   providers: [AppService],
 })
