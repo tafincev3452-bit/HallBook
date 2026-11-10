@@ -7,9 +7,10 @@ import { EstablishmentsModule } from './establishments/establishments.module';
 import { MenuModule } from './menu/menu.module';
 import { ShiftsModule } from './shifts/shifts.module';
 import { TechcardsModule } from './techcards/techcards.module';
+import { TablesModule } from './tables/tables.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, EstablishmentsModule, MenuModule, ShiftsModule, TechcardsModule],
+  imports: [PrismaModule, AuthModule, EstablishmentsModule, MenuModule, ShiftsModule, TechcardsModule, TablesModule],
   controllers: [AppController],
   providers: [AppService],
 })
