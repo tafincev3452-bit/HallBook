@@ -17,40 +17,42 @@ export default function LoginPage() {
       const data = await res.json();
       if (res.ok && data.token) {
         localStorage.setItem('token', data.token);
-        setMessage('Успешно! Токен сохранён.');
+        window.location.href = '/dashboard';
       } else {
-        setMessage('Ошибка: ' + (data.message || JSON.stringify(data)));
+        setMessage(data.message || 'Ошибка входа');
       }
     } catch (e) {
-      setMessage('Ошибка сети: ' + e);
+      setMessage('Ошибка сети');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center">Вход в HallBook</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center p-4">
+      <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-10 rounded-2xl shadow-2xl w-full max-w-md">
+        <h1 className="text-4xl font-bold text-white text-center mb-2">HallBook</h1>
+        <p className="text-blue-200 text-center mb-8">Вход в систему</p>
+        
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-4 mb-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <input
           type="password"
           placeholder="Пароль"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-4 mb-6 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold p-4 rounded-xl transition-all duration-200 shadow-lg"
         >
           Войти
         </button>
-        {message && <p className="mt-4 text-center text-red-600">{message}</p>}
+        {message && <p className="mt-4 text-center text-red-300">{message}</p>}
       </div>
     </div>
   );

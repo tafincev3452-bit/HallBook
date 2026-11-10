@@ -23,10 +23,10 @@ export default function DashboardPage() {
       fetch('http://localhost:3000/promotions', { headers }).then(r => r.json()),
     ]);
     setProfile(p);
-    setMenu(m);
-    setTables(t);
-    setShifts(s);
-    setPromotions(pr);
+    setMenu(Array.isArray(m) ? m : []);
+    setTables(Array.isArray(t) ? t : []);
+    setShifts(Array.isArray(s) ? s : []);
+    setPromotions(Array.isArray(pr) ? pr : []);
   };
 
   useEffect(() => {
@@ -36,72 +36,81 @@ export default function DashboardPage() {
   }, [router]);
 
   const createMenu = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')!;
     await fetch('http://localhost:3000/menu', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
       body: JSON.stringify({ ...newMenu, price: Number(newMenu.price) }),
     });
     setNewMenu({ name: '', price: '', category: '' });
-    loadData(token!);
+    loadData(token);
   };
 
   const createTable = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')!;
     await fetch('http://localhost:3000/tables', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
       body: JSON.stringify({ ...newTable, seats: Number(newTable.seats), x: Number(newTable.x), y: Number(newTable.y) }),
     });
     setNewTable({ name: '', seats: '', x: '100', y: '100' });
-    loadData(token!);
+    loadData(token);
   };
 
-  if (!profile) return <div className="p-8 text-center">Загрузка...</div>;
+  if (!profile) return <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white text-xl">Загрузка...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">HallBook — Админка</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
+          HallBook Admin
+        </h1>
 
-      <div className="bg-white p-6 rounded-lg shadow mb-6 max-w-2xl mx-auto">
-        <h2 className="text-xl font-semibold mb-2">Профиль</h2>
-        <p><strong>Имя:</strong> {profile.name}</p>
-        <p><strong>Роль:</strong> {profile.role}</p>
-        <p><strong>Заведение:</strong> {profile.establishmentId}</p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        {/* Меню */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Меню ({menu.length})</h2>
-          {menu.map(item => <div key={item.id} className="mb-2">{item.name} — {item.price} ₽</div>)}
-          <div className="mt-4 space-y-2">
-            <input placeholder="Название" value={newMenu.name} onChange={e => setNewMenu({...newMenu, name: e.target.value})} className="w-full p-2 border rounded" />
-            <input placeholder="Цена" type="number" value={newMenu.price} onChange={e => setNewMenu({...newMenu, price: e.target.value})} className="w-full p-2 border rounded" />
-            <input placeholder="Категория" value={newMenu.category} onChange={e => setNewMenu({...newMenu, category: e.target.value})} className="w-full p-2 border rounded" />
-            <button onClick={createMenu} className="w-full bg-green-600 text-white p-2 rounded">Добавить позицию</button>
+        <div className="bg-white/10 backdrop-blur border border-white/10 p-6 rounded-2xl mb-8">
+          <h2 className="text-2xl font-semibold mb-3">Профиль</h2>
+          <div className="grid md:grid-cols-3 gap-4 text-blue-100">
+            <p><span className="text-white/60">Имя:</span> {profile.name}</p>
+            <p><span className="text-white/60">Роль:</span> {profile.role}</p>
+            <p><span className="text-white/60">Заведение:</span> {profile.establishmentId?.slice(0, 8)}...</p>
           </div>
         </div>
 
-        {/* Столы */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Столы ({tables.length})</h2>
-          {tables.map(table => <div key={table.id} className="mb-2">{table.name} — {table.seats} мест</div>)}
-          <div className="mt-4 space-y-2">
-            <input placeholder="Название" value={newTable.name} onChange={e => setNewTable({...newTable, name: e.target.value})} className="w-full p-2 border rounded" />
-            <input placeholder="Мест" type="number" value={newTable.seats} onChange={e => setNewTable({...newTable, seats: e.target.value})} className="w-full p-2 border rounded" />
-            <button onClick={createTable} className="w-full bg-green-600 text-white p-2 rounded">Добавить стол</button>
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div className="bg-white/10 backdrop-blur border border-white/10 p-6 rounded-2xl">
+            <h2 className="text-2xl font-semibold mb-4">Меню <span className="text-blue-300">({menu.length})</span></h2>
+            <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
+              {menu.map(item => (
+                <div key={item.id} className="flex justify-between bg-white/5 p-3 rounded-lg">
+                  <span>{item.name}</span>
+                  <span className="text-cyan-300">{item.price} ₽</span>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-3">
+              <input placeholder="Название" value={newMenu.name} onChange={e => setNewMenu({...newMenu, name: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <input placeholder="Цена" type="number" value={newMenu.price} onChange={e => setNewMenu({...newMenu, price: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <input placeholder="Категория" value={newMenu.category} onChange={e => setNewMenu({...newMenu, category: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <button onClick={createMenu} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 p-3 rounded-xl font-semibold transition">
+                Добавить позицию
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Смены ({shifts.length})</h2>
-          {shifts.map(s => <div key={s.id}>{new Date(s.date).toLocaleDateString()} {s.startTime}–{s.endTime}</div>)}
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Акции ({promotions.length})</h2>
-          {promotions.map(p => <div key={p.id}>{p.title}</div>)}
+          <div className="bg-white/10 backdrop-blur border border-white/10 p-6 rounded-2xl">
+            <h2 className="text-2xl font-semibold mb-4">Столы <span className="text-blue-300">({tables.length})</span></h2>
+            <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
+              {tables.map(table => (
+                <div key={table.id} className="bg-white/5 p-3 rounded-lg">{table.name} — {table.seats} мест</div>
+              ))}
+            </div>
+            <div className="space-y-3">
+              <input placeholder="Название" value={newTable.name} onChange={e => setNewTable({...newTable, name: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <input placeholder="Количество мест" type="number" value={newTable.seats} onChange={e => setNewTable({...newTable, seats: e.target.value})} className="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50" />
+              <button onClick={createTable} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 p-3 rounded-xl font-semibold transition">
+                Добавить стол
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
