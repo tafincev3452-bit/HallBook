@@ -10,7 +10,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(email: string, password: string, name: string, role: string = 'STAFF') {
+  async register(email: string, password: string, name: string) {
     const existingUser = await this.prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       throw new ConflictException('Пользователь с таким email уже существует');
@@ -23,7 +23,7 @@ export class AuthService {
         email,
         password: hashedPassword,
         name,
-        role,
+        role: 'STAFF',
       },
     });
 
@@ -44,6 +44,10 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user) {
       throw new UnauthorizedException('Неверный email или пароль');
+    }
+
+    if (user.isBlocked) {
+      throw new UnauthorizedException('Аккаунт заблокирован');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);

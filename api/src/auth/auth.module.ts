@@ -9,7 +9,7 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     PrismaModule,
     JwtModule.register({
-      secret: 'hallbook-secret-key-change-later',
+      secret: process.env.JWT_SECRET || 'hallbook-secret-key-change-later',
       signOptions: { expiresIn: '7d' },
     }),
   ],
